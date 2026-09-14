@@ -1,12 +1,74 @@
 {
-  "name": "nodemailer-postal",
-  "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+	"name": "nodemailer-postal",
+	"version": "1.1.0",
+	"description": "Nodemailer transport that delivers mail through the Postal HTTP API instead of SMTP. Works with nodemailer 8, 9 and 10.",
+	"keywords": [
+		"nodemailer",
+		"nodemailer-transport",
+		"postal",
+		"postalserver",
+		"email",
+		"mail",
+		"transport",
+		"api"
+	],
+	"license": "MIT",
+	"author": "Ufuk Furkan Öztürk",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mudrockdev/nodemailer-postal.git"
+	},
+	"bugs": {
+		"url": "https://github.com/mudrockdev/nodemailer-postal/issues"
+	},
+	"homepage": "https://github.com/mudrockdev/nodemailer-postal#readme",
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.cts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.mts",
+				"default": "./dist/index.mjs"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			}
+		},
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"sideEffects": false,
+	"scripts": {
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"typecheck": "tsc --noEmit",
+		"test": "bun test",
+		"prepublishOnly": "bun run typecheck && bun run test && bun run build"
+	},
+	"peerDependencies": {
+		"nodemailer": ">=8.0.0 <11"
+	},
+	"devDependencies": {
+		"@types/node": "^26.4.0",
+		"@types/nodemailer": "^8.0.1",
+		"bun-types": "^1.4.0",
+		"nodemailer": "^8.0.11",
+		"nodemailer10": "npm:nodemailer@^10.0.0",
+		"nodemailer9": "npm:nodemailer@^9.1.1",
+		"tsdown": "^0.23.0",
+		"typescript": "^6.0.3"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }
