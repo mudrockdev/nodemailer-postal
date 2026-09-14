@@ -9,7 +9,8 @@ import {
 } from 'nodemailer';
 import {
 	createTransport as createTransport10,
-	type SendMailOptions as SendMailOptions10
+	type SendMailOptions as SendMailOptions10,
+	type Transporter as Transporter10
 } from 'nodemailer10';
 import {
 	PostalTransport,
@@ -35,7 +36,10 @@ export async function withNodemailer8(): Promise<string> {
 }
 
 export async function withNodemailer10(): Promise<string> {
-	const transporter = createTransport10(transport);
+	const postalTransporter = createTransport10(transport);
+	// A custom transport result must remain assignable to nodemailer's base result
+	// so consumers can store SMTP and Postal transports behind one Transporter type.
+	const transporter: Transporter10 = postalTransporter;
 	const options: PostalMailOptions<SendMailOptions10> = {
 		from: 'a@example.com',
 		to: 'b@example.com',
@@ -43,7 +47,7 @@ export async function withNodemailer10(): Promise<string> {
 		postal: { mode: 'message' }
 	};
 	// nodemailer 10 ships its own types and infers the Postal result type.
-	const info: PostalSentMessageInfo = await transporter.sendMail(options);
+	const info: PostalSentMessageInfo = await postalTransporter.sendMail(options);
 	await transporter.verify();
 	return info.postal.message_id;
 }

@@ -63,6 +63,8 @@ export type PostalMailOptions<T = Record<string, unknown>> = T & {
 export interface PostalEnvelope {
 	from: string | false;
 	to: string[];
+	/** Custom envelope fields preserved by nodemailer. */
+	[key: string]: unknown;
 }
 
 /** `data` of a successful `send/raw` or `send/message` response. */
