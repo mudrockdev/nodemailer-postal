@@ -1,6 +1,6 @@
 {
 	"name": "nodemailer-postal",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "Nodemailer transport that delivers mail through the Postal HTTP API instead of SMTP. Works with nodemailer 8, 9 and 10.",
 	"keywords": [
 		"nodemailer",
